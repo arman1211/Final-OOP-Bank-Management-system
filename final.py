@@ -102,7 +102,7 @@ class User:
         if amount>0:
             self.balance+=amount
             transaction_id = len(self.transaction_history)+101
-            self.transaction_history[transaction_id] = ["deposit",amount]
+            self.transaction_history[transaction_id] = ["deposited",amount]
             print(f"Succesfully deposited {amount} tk")
         else:
             print("Sorry, the amount can't be negative")
@@ -125,10 +125,10 @@ class User:
     def check_transaction_history(self):
         if len(self.transaction_history)>0:
             print('--------------------------------------------------')
-            print("Id\tType\t\tAmount")
+            print("Id\t\tType\t\tAmount")
             print('--------------------------------------------------')
             for t_id,history in self.transaction_history.items():
-                print(f'{t_id}\t\t{history[0]}\t\t{history[1]}')
+                print(f'{t_id}\t\t{history[0]}\t{history[1]}')
         else:
             print("No transaction history available")
     def take_loan(self,amount):
@@ -136,7 +136,7 @@ class User:
             self.loan += amount
             self.loan_cnt += 1
             transaction_id = len(self.transaction_history)+101
-            self.transaction_history[transaction_id] = ["loan",amount]
+            self.transaction_history[transaction_id] = ["loan taken",amount]
             print(f'Succesfully taken loan amount {amount}')
         elif self.loan>=2:
             print("Maximul loan limit exceeded")
@@ -150,7 +150,7 @@ class User:
                 self.bank.users[account_no].balance += amount
                 self.balance -= amount
                 transaction_id = len(self.transaction_history)+101
-                self.transaction_history[transaction_id] = ["transfer",amount]
+                self.transaction_history[transaction_id] = ["transfered",amount]
 
                 transaction_id = len(self.bank.users[account_no].transaction_history)+101
                 self.bank.users[account_no].transaction_history[transaction_id] = ["recieved",amount]
